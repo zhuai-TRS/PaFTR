@@ -34,16 +34,15 @@ pip install -r requirements.txt
 
 ### 2、Prepare Data
 
-**Download the datasets first** (PEMS and traffic), then place them under `./dataset/`.
+Create `./dataset/` and place the files below (directly under `./dataset/`).  
 
+#### Public benchmarks used in the paper
 
-| Source        | Link                                                                                                                                                                               |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Baidu Netdisk | [https://pan.baidu.com/s/18qiqVq__shRYWFNOuOblHg?pwd=qf4t](https://pan.baidu.com/s/18qiqVq__shRYWFNOuOblHg?pwd=qf4t) (extract code: `qf4t`)                                        |
-| Google Drive  | [https://drive.google.com/drive/folders/1Rqrljn3XA4hFmwilmH_BdZq65eyY03MZ?usp=drive_link](https://drive.google.com/drive/folders/1Rqrljn3XA4hFmwilmH_BdZq65eyY03MZ?usp=drive_link) |
-
-
-Create a folder named `./dataset` and put the downloaded files into this directory (directly under `./dataset/`).
+| Dataset | File | Public source |
+| -------- | ---- | ------------- |
+| PEMS03/04/07/08 | `PEMS03.npz` … `PEMS08.npz` | [Google Drive](https://drive.google.com/file/d/1bNbw1y8VYp-8pkRTqbjoW-TA-G8T0EQf/view) |
+| Traffic | `traffic.csv` | [Google Drive](https://drive.google.com/file/d/1bNbw1y8VYp-8pkRTqbjoW-TA-G8T0EQf/view) |
+| OD | `OD_2976.csv` | Not public |
 
 This repo supports two dataset types (set by `--data`):
 
