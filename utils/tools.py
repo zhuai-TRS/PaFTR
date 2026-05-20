@@ -121,24 +121,6 @@ def visualize_cycle(self, setting):
     plt.savefig(os.path.join(save_path, 'cycle_heatmap_all.png'), dpi=150, bbox_inches='tight')
     plt.close()
 
-    # for i in range(enc_in):
-        #     plt.figure(figsize=(12, 4))
-        #
-        #     # 提取第 i 个变量的周期模式 [cycle_len]
-        #     cycle_pattern = cycle_query[:, i]
-        #
-        #     # 绘制折线图
-        #     plt.plot(range(cycle_len), cycle_pattern, linewidth=1.5, color='steelblue')
-        #     plt.xlabel('Cycle Step', fontsize=12)
-        #     plt.ylabel('Query Value', fontsize=12)
-        #     plt.title(f'Cycle Pattern - channel {i}', fontsize=14)
-        #     plt.grid(True, alpha=0.3, linestyle='--')
-        #     plt.tight_layout()
-        #
-        #     file_path = os.path.join(save_path, f'cycle_channel{i}.png')
-        #     plt.savefig(file_path, dpi=150, bbox_inches='tight')
-        #     plt.close()
-
 def visualize_cycle_weight(self, setting):
     save_path = os.path.join('./cycle_visualization/', setting)
     if not os.path.exists(save_path):
