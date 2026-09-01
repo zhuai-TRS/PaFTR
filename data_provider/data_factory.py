@@ -28,6 +28,10 @@ def data_provider(args, flag):
         batch_size = args.batch_size
         freq = args.freq
 
+    extra = {}
+    if flag != 'pred':
+        extra['cycle_shift'] = int(getattr(args, 'cycle_shift', 0) or 0)
+
     data_set = Data(
         root_path=args.root_path,
         data_path=args.data_path,
@@ -37,7 +41,8 @@ def data_provider(args, flag):
         target=args.target,
         timeenc=timeenc,
         freq=freq,
-        cycle=args.cycle_len
+        cycle=args.cycle_len,
+        **extra
     )
     print(f"[{flag}] Dataset size: {len(data_set)}, Batch size: {batch_size}")
     data_loader = DataLoader(

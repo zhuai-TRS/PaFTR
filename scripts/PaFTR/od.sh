@@ -22,6 +22,8 @@ lradj=type3
 use_seq_cycle_complex='complex'
 fusion_type='freq'
 
+for random_seed in 2026 2027 2028
+do
 for pred_len in 12 24 48 96
 do
   python -u run.py \
@@ -45,5 +47,7 @@ do
       --itr 1 \
       --lradj $lradj \
       --use_seq_cycle_complex $use_seq_cycle_complex \
-      --fusion_type $fusion_type
+      --fusion_type $fusion_type \
+      --random_seed $random_seed
+done
 done

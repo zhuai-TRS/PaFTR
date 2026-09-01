@@ -86,17 +86,19 @@ For example:
 sh scripts/PaFTR/pems03.sh
 ```
 
-Each script runs multiple prediction lengths in a loop by calling `run.py`.
+Each script trains three random seeds (`2026 2027 2028`) and the four prediction lengths used in the paper. Main-table numbers are the mean ± std over the three seeds.
 
 ### 4、Ablation Scripts
 
-Ablations are provided under `scripts/Ablation/` (e.g., `scripts/Ablation/pems03.sh`).
+Ablations are provided under `scripts/Ablation/` (e.g., `scripts/Ablation/pems03.sh`) and use a single seed (`2026`).
 
 They control ablation-related arguments in `run.py`, including:
 
 - `--use_seq_cycle_complex` in `{seq, cycle, complex}`
 - `--fusion_type` in `{freq, time_add, time_concat}`
 - `--qkv` in `{cfs, csf, fcs, fsc, sfc, scf}`
+
+Phase-index shift (frozen weights, test-only) is under `scripts/Phase/`. It loads the main seed-`2026` checkpoint and applies `--cycle_shift` in clock hours: ±12/24/36 steps on PEMS, ±4/8/12 on OD, ±1/2/3 on Traffic. Run it after the corresponding `scripts/PaFTR/` job has finished.
 
 ## Code Structure
 

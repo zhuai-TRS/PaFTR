@@ -21,6 +21,7 @@ lradj=type3
 
 use_seq_cycle_complex='complex'
 fusion_type='freq'
+random_seed=2026
 
 qkv='csf'
 for pred_len in 12 24 48 96
@@ -44,6 +45,7 @@ do
      --train_epochs $train_epochs \
      --patience $patience \
      --itr 1 \
+     --random_seed $random_seed \
      --lradj $lradj \
      --use_seq_cycle_complex $use_seq_cycle_complex \
      --fusion_type $fusion_type \
@@ -72,6 +74,7 @@ do
      --train_epochs $train_epochs \
      --patience $patience \
      --itr 1 \
+     --random_seed $random_seed \
      --lradj $lradj \
      --use_seq_cycle_complex $use_seq_cycle_complex \
      --fusion_type $fusion_type \
@@ -100,6 +103,7 @@ do
      --train_epochs $train_epochs \
      --patience $patience \
      --itr 1 \
+     --random_seed $random_seed \
      --lradj $lradj \
      --use_seq_cycle_complex $use_seq_cycle_complex \
      --fusion_type $fusion_type \
@@ -128,6 +132,7 @@ do
      --train_epochs $train_epochs \
      --patience $patience \
      --itr 1 \
+     --random_seed $random_seed \
      --lradj $lradj \
      --use_seq_cycle_complex $use_seq_cycle_complex \
      --fusion_type $fusion_type \
@@ -156,6 +161,7 @@ do
      --train_epochs $train_epochs \
      --patience $patience \
      --itr 1 \
+     --random_seed $random_seed \
      --lradj $lradj \
      --use_seq_cycle_complex $use_seq_cycle_complex \
      --fusion_type $fusion_type \
@@ -186,6 +192,7 @@ do
       --train_epochs $train_epochs \
       --patience $patience \
       --itr 1 \
+      --random_seed $random_seed \
       --lradj $lradj \
       --use_seq_cycle_complex $use_seq_cycle_complex \
       --fusion_type $fusion_type \
@@ -214,6 +221,7 @@ do
       --train_epochs $train_epochs \
       --patience $patience \
       --itr 1 \
+      --random_seed $random_seed \
       --lradj $lradj \
       --use_seq_cycle_complex $use_seq_cycle_complex \
       --fusion_type $fusion_type \
@@ -244,6 +252,7 @@ do
       --train_epochs $train_epochs \
       --patience $patience \
       --itr 1 \
+      --random_seed $random_seed \
       --lradj $lradj \
       --use_seq_cycle_complex $use_seq_cycle_complex \
       --fusion_type $fusion_type \
@@ -272,6 +281,7 @@ do
       --train_epochs $train_epochs \
       --patience $patience \
       --itr 1 \
+      --random_seed $random_seed \
       --lradj $lradj \
       --use_seq_cycle_complex $use_seq_cycle_complex \
       --fusion_type $fusion_type \

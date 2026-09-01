@@ -22,6 +22,8 @@ patience=5
 use_seq_cycle_complex='complex'
 fusion_type='freq'
 
+for random_seed in 2026 2027 2028
+do
 for pred_len in 96 192 336 720
 do
   python -u run.py \
@@ -45,5 +47,7 @@ do
       --patience $patience \
       --itr 1 \
       --use_seq_cycle_complex $use_seq_cycle_complex \
-      --fusion_type $fusion_type
+      --fusion_type $fusion_type \
+      --random_seed $random_seed
+done
 done

@@ -14,7 +14,8 @@ warnings.filterwarnings('ignore')
 class Dataset_Custom(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', cycle=None):
+                 target='OT', scale=True, timeenc=0, freq='h', cycle=None,
+                 cycle_shift=0):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -36,6 +37,7 @@ class Dataset_Custom(Dataset):
         self.timeenc = timeenc
         self.freq = freq
         self.cycle = cycle
+        self.cycle_shift = int(cycle_shift or 0)
 
         self.root_path = root_path
         self.data_path = data_path
@@ -92,7 +94,7 @@ class Dataset_Custom(Dataset):
         self.data_y = data[border1:border2]
         self.data_stamp = data_stamp
 
-        self.cycle_index = (np.arange(len(data)) % self.cycle)[border1:border2]
+        self.cycle_index = ((np.arange(len(data)) + self.cycle_shift) % self.cycle)[border1:border2]
 
         df_stamp = df_raw[['date']][border1:border2]
         df_stamp['date'] = pd.to_datetime(df_stamp['date'])
@@ -131,7 +133,8 @@ class Dataset_Custom(Dataset):
 class Dataset_PEMS(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', cycle=None, hour_length=24, day_length=7):
+                 target='OT', scale=True, timeenc=0, freq='h', cycle=None,
+                 hour_length=24, day_length=7, cycle_shift=0):
         # size [seq_len, label_len, pred_len]
         # info
         self.seq_len = size[0]
@@ -148,6 +151,7 @@ class Dataset_PEMS(Dataset):
         self.timeenc = timeenc
         self.freq = freq
         self.cycle = cycle
+        self.cycle_shift = int(cycle_shift or 0)
         self.hour_length = hour_length
         self.day_length = day_length
 
@@ -177,7 +181,7 @@ class Dataset_PEMS(Dataset):
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
 
-        self.cycle_index = (np.arange(len(data)) % self.cycle)[border1:border2]
+        self.cycle_index = ((np.arange(len(data)) + self.cycle_shift) % self.cycle)[border1:border2]
 
         self.hour_index = (np.arange(len(data)) // 12 % self.hour_length)[border1:border2]
         self.day_index = (np.arange(len(data)) // 288 % self.day_length)[border1:border2]

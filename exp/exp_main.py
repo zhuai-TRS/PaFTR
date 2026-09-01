@@ -243,8 +243,9 @@ class Exp_Main(Exp_Basic):
 
         return self.model
 
-    def test(self, setting, test=0):
+    def test(self, setting, test=0, log_setting=None):
         test_data, test_loader = self._get_data(flag='test')
+        write_setting = log_setting or setting
 
         if test:
             print('loading model')
@@ -252,7 +253,7 @@ class Exp_Main(Exp_Basic):
 
         preds = []
         trues = []
-        folder_path = './test_results/' + setting + '/'
+        folder_path = './test_results/' + write_setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
@@ -329,7 +330,7 @@ class Exp_Main(Exp_Basic):
         trues = trues.reshape(-1, trues.shape[-2], trues.shape[-1])
 
         # result save
-        folder_path = './results/' + setting + '/'
+        folder_path = './results/' + write_setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
@@ -337,7 +338,7 @@ class Exp_Main(Exp_Basic):
 
         print('mse:{}, mae:{}'.format(mse, mae))
         f = open("result.txt", 'a')
-        f.write(setting + "  \n")
+        f.write(write_setting + "  \n")
         f.write('mse:{}, mae:{}'.format(mse, mae))
         f.write('\n')
         f.close()

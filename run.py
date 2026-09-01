@@ -94,6 +94,10 @@ def main():
 
     # seed
     parser.add_argument('--random_seed', type=int, default=2026, help='seed')
+    parser.add_argument('--cycle_shift', type=int, default=0,
+                        help='offset applied to cycle_index at test time with frozen weights. '
+                             'PEMS 5-min: 12 steps = 1 hour; OD 15-min: 4 steps = 1 hour; '
+                             'Traffic hourly: 1 step = 1 hour. Checkpoint is the unshifted run.')
     # Ablation experiment
     parser.add_argument('--use_seq_cycle_complex', type=str, default='complex',
                         help='[seq, cycle, complex]')
@@ -136,6 +140,8 @@ def main():
                 args.cycle_len,
                 fix_seed
             )
+            if args.cycle_shift:
+                setting = setting + '_cshift{}'.format(args.cycle_shift)
 
             exp = Exp(args)
             print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
@@ -160,10 +166,14 @@ def main():
             args.cycle_len,
             fix_seed
         )
+        ckpt_setting = setting
+        if args.cycle_shift:
+            setting = setting + '_tshift{}'.format(args.cycle_shift)
 
         exp = Exp(args)
-        print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
-        exp.test(setting, test=1)
+        print('>>>>>>>testing : {} (ckpt {})<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(
+            setting, ckpt_setting))
+        exp.test(ckpt_setting, test=1, log_setting=setting)
         torch.cuda.empty_cache()
 
 
