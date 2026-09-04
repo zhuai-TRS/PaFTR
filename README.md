@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-### 1、Environment Requirements
+### 1. Environment Requirements
 
 This project is implemented with PyTorch. Create a virtual environment and install dependencies.
 
@@ -10,7 +10,7 @@ This project is implemented with PyTorch. Create a virtual environment and insta
 
 Linux / macOS / WSL:
 
-```
+```bash
 python3 -m venv PaFTR
 source PaFTR/bin/activate
 pip install -r requirements.txt
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 Windows (PowerShell):
 
-```
+```powershell
 py -m venv PaFTR
 .\PaFTR\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -26,45 +26,43 @@ pip install -r requirements.txt
 
 #### Option B: Conda
 
-```
+```bash
 conda create -n PaFTR python=3.8
 conda activate PaFTR
 pip install -r requirements.txt
 ```
 
-### 2、Prepare Data
+### 2. Prepare Data
 
-Create `./dataset/` and place the files below (directly under `./dataset/`).  
+Create `./dataset/` and place the files below (directly under `./dataset/`).
 
 #### Public benchmarks used in the paper
 
 | Dataset | File | Public source |
 | -------- | ---- | ------------- |
-| PEMS03/04/07/08 | `PEMS03.npz` … `PEMS08.npz` | [Google Drive](https://drive.google.com/file/d/1bNbw1y8VYp-8pkRTqbjoW-TA-G8T0EQf/view) |
+| PEMS03/04/07/08 | `PEMS03.npz` ... `PEMS08.npz` | [Google Drive](https://drive.google.com/file/d/1bNbw1y8VYp-8pkRTqbjoW-TA-G8T0EQf/view) |
 | Traffic | `traffic.csv` | [Google Drive](https://drive.google.com/file/d/1bNbw1y8VYp-8pkRTqbjoW-TA-G8T0EQf/view) |
 | OD | `OD_2976.csv` | Not public |
 
 This repo supports two dataset types (set by `--data`):
 
-- `**custom`**: CSV file with a `date` column.
+- **`custom`**: CSV file with a `date` column.
   - **Format**: `date, <feature_1>, ..., <feature_n>, <target>`
   - **Default target column name**: `OT` (set by `--target`)
-  - **Example used in scripts**:
-    - `./dataset/traffic.csv`
-- `**PEMS`**: `.npz` file containing `data` array.
-  - **Format**: `np.load(... )['data'][:, :, 0]` is used in code
-  - **Example used in scripts**:
-    - `./dataset/PEMS03.npz`
+  - **Example used in scripts**: `./dataset/traffic.csv`
+- **`PEMS`**: `.npz` file containing a `data` array.
+  - **Format**: `np.load(...)['data'][:, :, 0]` is used in code
+  - **Example used in scripts**: `./dataset/PEMS03.npz`
 
 **Note**: File path is controlled by `--root_path` and `--data_path`. For example, `--root_path ./dataset/ --data_path traffic.csv` expects `./dataset/traffic.csv`.
 
-### 3、Training Example (Reproduce)
+### 3. Training Example (Reproduce)
 
-You can reproduce results by running the provided scripts.
+You can reproduce results by running the provided scripts (Git Bash / WSL / Linux).
 
 #### Option A: Run all main experiments
 
-```
+```bash
 sh run.sh
 ```
 
@@ -82,15 +80,15 @@ This will execute:
 
 For example:
 
-```
+```bash
 sh scripts/PaFTR/pems03.sh
 ```
 
-Each script trains three random seeds (`2026 2027 2028`) and the four prediction lengths used in the paper. Main-table numbers are the mean ± std over the three seeds.
+Each main script trains three random seeds (`2026 2027 2028`) and the four prediction lengths used in the paper. Main-table numbers are the mean ± std over the three seeds.
 
-### 4、Ablation Scripts
+### 4. Ablation and Phase-Index Scripts
 
-Ablations are provided under `scripts/Ablation/` (e.g., `scripts/Ablation/pems03.sh`) and use a single seed (`2026`).
+Ablations are under `scripts/Ablation/` (e.g., `scripts/Ablation/pems03.sh`) and use a single seed (`2026`).
 
 They control ablation-related arguments in `run.py`, including:
 
@@ -103,8 +101,7 @@ Phase-index shift (frozen weights, test-only) is under `scripts/Phase/`. It load
 ## Code Structure
 
 - `run.py`: main entry (argument parsing + train/test loop)
-- `exp/exp_main.py`: training/validation/testing pipeline
+- `exp/exp_main.py`: training / validation / testing pipeline
 - `models/PaFTR.py`: PaFTR model implementation
 - `data_provider/`: dataset loading and dataloader building
-- `scripts/`: runnable experiment scripts
-
+- `scripts/`: runnable experiment scripts (`PaFTR/`, `Ablation/`, `Phase/`)
